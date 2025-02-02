@@ -1,0 +1,10 @@
+{
+  "catalogs": {},
+  "aliases": {
+    "cli": {
+      "script-ref": "forbidden.java",
+      "java-agents": []
+    }
+  },
+  "templates": {}
+}

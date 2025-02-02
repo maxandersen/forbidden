@@ -26,10 +26,10 @@ import picocli.CommandLine.Parameters;
 @Command(name = "forbidden", mixinStandardHelpOptions = true, version = "forbidden 0.1", description = "forbidden made with jbang")
 class forbidden implements Callable<Integer> {
 
-    @Option(names = { "-d", "--dir" }, description = "directory with class files to check")
+    @Option(names = { "-d", "--dir" }, description = "directory with class files to check", required = true)
     private Path dir;
 
-    @Parameters(description = "everything else")
+    @Parameters(description = "everything else to pass to forbidden-api")
     private List<String> params = new ArrayList<>();
 
     public static void main(String... args) {
