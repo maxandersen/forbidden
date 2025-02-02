@@ -1,0 +1,4 @@
+# Forbidden API experiment
+
+While waiting for https://github.com/policeman-tools/forbidden-apis/pull/259 to be implemented, I've created a custom command for checking a jar file for forbidden APIs.
+
