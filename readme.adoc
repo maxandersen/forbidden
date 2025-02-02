@@ -2,3 +2,30 @@
 
 While waiting for https://github.com/policeman-tools/forbidden-apis/pull/259 to be implemented, I've created a custom command for checking a jar file for forbidden APIs.
 
+You can do this:
+
+NOTE: This is a quick and dirty using io.quarkus:quarkus-core:RELEASE as the GAV to check which will obviously has forbidden API usage.
+Real calls would replace the GAV with the actual artifact you want to check.
+
+```
+jbang cli@maxandersen/forbidden -d `jbang info jar io.quarkus:quarkus-core:RELEASE` -- -c `jbang info classpath io.quarkus:quarkus-core:RELEASE` --allowmissingclasses --ignoresignaturesofmissingclasses --signaturesfile %{https://raw.githubusercontent.com/maxandersen/forbidden/refs/heads/main/quarkus-forbidden}
+```
+
+Below is explained each part of the command:
+
+```
+# Run the forbidden API checker script from maxandersen's JBang catalog
+jbang cli@maxandersen/forbidden \
+    # Directory containing classes to check - use jbang to get the JAR file location for maven artifact
+    -d `jbang info jar io.quarkus:quarkus-core:RELEASE` \
+    -- \
+    # Classpath for checking - gets full classpath of maven artifact and dependencies
+    -c `jbang info classpath io.quarkus:quarkus-core:RELEASE` \
+    # Don't fail if referenced classes are missing
+    --allowmissingclasses \
+    # Don't fail if signatures reference missing classes
+    --ignoresignaturesofmissingclasses \
+    # Use the quarkus-forbidden signatures file from GitHub
+    --signaturesfile %{https://raw.githubusercontent.com/maxandersen/forbidden/refs/heads/main/quarkus-forbidden}
+```
+
